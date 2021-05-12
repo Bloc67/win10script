@@ -32,75 +32,101 @@ $Form.text                       = "Form"
 $Form.TopMost                    = $false
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 450
+$Panel1.height                   = 500
 $Panel1.width                    = 500
 $Panel1.location                 = New-Object System.Drawing.Point(25,25)
 
 $installchoco                    = New-Object system.Windows.Forms.Button
 $installchoco.text               = "Install Chocolatey"
 $installchoco.width              = 400
-$installchoco.height             = 30
+$installchoco.height             = 35
 $installchoco.location           = New-Object System.Drawing.Point(0,0)
 $installchoco.Font               = New-Object System.Drawing.Font('Arial',11,[System.Drawing.FontStyle]::Bold)
 
 $winterminal                     = New-Object system.Windows.Forms.Button
-$winterminal.text                = "Install [Chrome] [7-zip] [Adobe Reader] [Lenovo System Update]"
-$winterminal.width               = 400
-$winterminal.height              = 60
+$winterminal.text                = "Chrome
+7-zip
+Adobe Reader"
+$winterminal.width               = 180
+$winterminal.height              = 70
 $winterminal.location            = New-Object System.Drawing.Point(0,40)
 $winterminal.Font                = New-Object System.Drawing.Font('Arial',11)
+
+$winterminal2                     = New-Object system.Windows.Forms.Button
+$winterminal2.text                = "Chrome
+7-zip
+Foxit"
+$winterminal2.width               = 200
+$winterminal2.height              = 70
+$winterminal2.location            = New-Object System.Drawing.Point(200,40)
+$winterminal2.Font                = New-Object System.Drawing.Font('Arial',11)
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
 $essentialtweaks.width           = 400
-$essentialtweaks.height          = 30
+$essentialtweaks.height          = 35
 $essentialtweaks.location        = New-Object System.Drawing.Point(0,120)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Arial',11)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disallow Background Apps"
 $backgroundapps.width            = 400
-$backgroundapps.height           = 30
+$backgroundapps.height           = 35
 $backgroundapps.location         = New-Object System.Drawing.Point(0,160)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Arial',11)
 
 $cortana                         = New-Object system.Windows.Forms.Button
 $cortana.text                    = "Disable Cortana"
 $cortana.width                   = 400
-$cortana.height                  = 30
+$cortana.height                  = 35
 $cortana.location                = New-Object System.Drawing.Point(0,200)
 $cortana.Font                    = New-Object System.Drawing.Font('Arial',11)
 
 $securityhigh                    = New-Object system.Windows.Forms.Button
 $securityhigh.text               = "Apply High Security Settings"
 $securityhigh.width              = 400
-$securityhigh.height             = 30
+$securityhigh.height             = 35
 $securityhigh.location           = New-Object System.Drawing.Point(0,240)
 $securityhigh.Font               = New-Object System.Drawing.Font('Arial',11)
 
 $defaultwindowsupdate            = New-Object system.Windows.Forms.Button
 $defaultwindowsupdate.text       = "Apply Default Windows Update Settings"
 $defaultwindowsupdate.width      = 400
-$defaultwindowsupdate.height     = 30
+$defaultwindowsupdate.height     = 35
 $defaultwindowsupdate.location   = New-Object System.Drawing.Point(0,280)
 $defaultwindowsupdate.Font       = New-Object System.Drawing.Font('Arial',11)
 
 $coretemp 		                 = New-Object system.Windows.Forms.Button
 $coretemp.text                   = "Install CoreTemp"
 $coretemp.width                  = 400
-$coretemp.height                 = 30
+$coretemp.height                 = 35
 $coretemp.location               = New-Object System.Drawing.Point(0,340)
 $coretemp.Font                   = New-Object System.Drawing.Font('Arial',11)
 
 $bleachbit 		                 = New-Object system.Windows.Forms.Button
 $bleachbit.text                  = "Install BleachBit"
 $bleachbit.width                 = 400
-$bleachbit.height                = 30
+$bleachbit.height                = 35
 $bleachbit.location              = New-Object System.Drawing.Point(0,380)
 $bleachbit.Font                  = New-Object System.Drawing.Font('Arial',11)
 
+$lenovo 		                 = New-Object system.Windows.Forms.Button
+$lenovo.text                     = "Lenovo System Update"
+$lenovo.width                 	 = 400
+$lenovo.height                   = 35
+$lenovo.location                 = New-Object System.Drawing.Point(0,420)
+$lenovo.Font                     = New-Object System.Drawing.Font('Arial',11)
+
+$PictureBox1                     = New-Object system.Windows.Forms.PictureBox
+$PictureBox1.width               = 400
+$PictureBox1.height              = 40
+$PictureBox1.location            = New-Object System.Drawing.Point(0,460)
+$PictureBox1.imageLocation       = "https://christitus.com/images/titus-toolbox.png"
+$PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+
+
 $Form.controls.AddRange(@($Panel1))
-$Panel1.controls.AddRange(@($installchoco,$winterminal,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit))
+$Panel1.controls.AddRange(@($installchoco,$winterminal,$winterminal2,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit,$lenovo))
 
 $installchoco.Add_Click({ 
     Write-Host "Installing Chocolatey"
@@ -122,14 +148,8 @@ $bleachbit.Add_Click({
 })
 
 $winterminal.Add_Click({ 
-    Write-Host "Chocolatey Apps"
-    Write-Host "----------------------"
-
 	Write-Host "Installing Google Chrome"
 	choco install googlechrome -y
-
-	Write-Host "Installing Lenovo System Update"
-	choco install lenovo-thinkvantage-system-update -y
 
 	Write-Host "Installing Adobe Reader DC"
 	choco install adobereader -y
@@ -137,6 +157,24 @@ $winterminal.Add_Click({
 	Write-Host "Installing 7-Zip Compression Tool"
 	choco install 7zip -y
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
+$winterminal2.Add_Click({ 
+	Write-Host "Installing Google Chrome"
+	choco install googlechrome -y
+
+	Write-Host "Installing Foxit"
+	choco install foxit -y
+
+	Write-Host "Installing 7-Zip Compression Tool"
+	choco install 7zip -y
+	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
+$lenovo.Add_Click({ 
+	Write-Host "Installing Lenovo System Update"
+	choco install lenovo-thinkvantage-system-update -y
+	$wshell.Popup("Lenovo System Update installed",0,"Done",0x0)
 })
 
 $essentialtweaks.Add_Click({ 
