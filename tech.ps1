@@ -46,8 +46,8 @@ $installchoco.Font               = New-Object System.Drawing.Font('Arial',11,[Sy
 $winterminal                     = New-Object system.Windows.Forms.Button
 $winterminal.text                = "Chrome
 7-zip
-Adobe Reader"
-$winterminal.width               = 180
+Adobe"
+$winterminal.width               = 130
 $winterminal.height              = 70
 $winterminal.location            = New-Object System.Drawing.Point(0,40)
 $winterminal.Font                = New-Object System.Drawing.Font('Arial',11)
@@ -56,10 +56,25 @@ $winterminal2                     = New-Object system.Windows.Forms.Button
 $winterminal2.text                = "Chrome
 7-zip
 Foxit"
-$winterminal2.width               = 200
+
+$winterminal2                     = New-Object system.Windows.Forms.Button
+$winterminal2.text                = "Chrome
+7-zip
+Foxit"
+$winterminal2.width               = 130
 $winterminal2.height              = 70
-$winterminal2.location            = New-Object System.Drawing.Point(200,40)
+$winterminal2.location            = New-Object System.Drawing.Point(133,40)
 $winterminal2.Font                = New-Object System.Drawing.Font('Arial',11)
+
+$winterminal3                     = New-Object system.Windows.Forms.Button
+$winterminal3.text                = "Firefox
+7-zip
+Foxit"
+$winterminal3.width               = 134
+$winterminal3.height              = 70
+$winterminal3.location            = New-Object System.Drawing.Point(266,40)
+$winterminal3.Font                = New-Object System.Drawing.Font('Arial',11)
+
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
@@ -126,7 +141,7 @@ $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zo
 
 
 $Form.controls.AddRange(@($Panel1))
-$Panel1.controls.AddRange(@($installchoco,$winterminal,$winterminal2,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit,$lenovo,$PictureBox1))
+$Panel1.controls.AddRange(@($installchoco,$winterminal,$winterminal2,$winterminal3,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit,$lenovo,$PictureBox1))
 
 $installchoco.Add_Click({ 
     Write-Host "Installing Chocolatey"
@@ -162,6 +177,18 @@ $winterminal.Add_Click({
 $winterminal2.Add_Click({ 
 	Write-Host "Installing Google Chrome"
 	choco install googlechrome -y
+
+	Write-Host "Installing Foxit"
+	choco install foxitreader -y
+
+	Write-Host "Installing 7-Zip Compression Tool"
+	choco install 7zip -y
+	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
+$winterminal3.Add_Click({ 
+	Write-Host "Installing Firefox"
+	choco install firefox -y
 
 	Write-Host "Installing Foxit"
 	choco install foxitreader -y
