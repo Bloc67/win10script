@@ -164,7 +164,7 @@ $winterminal2.Add_Click({
 	choco install googlechrome -y
 
 	Write-Host "Installing Foxit"
-	choco install foxit -y
+	choco install foxitreader -y
 
 	Write-Host "Installing 7-Zip Compression Tool"
 	choco install 7zip -y
