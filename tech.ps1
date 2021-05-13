@@ -27,12 +27,12 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(450,550)
+$Form.ClientSize                 = New-Object System.Drawing.Point(450,600)
 $Form.text                       = "Form"
 $Form.TopMost                    = $false
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 500
+$Panel1.height                   = 590
 $Panel1.width                    = 500
 $Panel1.location                 = New-Object System.Drawing.Point(25,25)
 
@@ -119,14 +119,14 @@ $lenovo.Font                     = New-Object System.Drawing.Font('Arial',11)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 400
-$PictureBox1.height              = 40
+$PictureBox1.height              = 80
 $PictureBox1.location            = New-Object System.Drawing.Point(0,460)
-$PictureBox1.imageLocation       = "https://christitus.com/images/titus-toolbox.png"
+$PictureBox1.imageLocation       = "https://github.com/Bloc67/win10script/raw/master/tech.png"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 
 $Form.controls.AddRange(@($Panel1))
-$Panel1.controls.AddRange(@($installchoco,$winterminal,$winterminal2,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit,$lenovo))
+$Panel1.controls.AddRange(@($installchoco,$winterminal,$winterminal2,$essentialtweaks,$backgroundapps,$cortana,$securityhigh,$defaultwindowsupdate,$coretemp,$bleachbit,$lenovo,$PictureBox1))
 
 $installchoco.Add_Click({ 
     Write-Host "Installing Chocolatey"
@@ -324,6 +324,23 @@ $essentialtweaks.Add_Click({
 
 	# SVCHost Tweak
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
+
+	# Taskview button
+	New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowTaskViewButton -PropertyType DWord -Value 0 -Force
+	
+	# Hide people button
+	New-Item -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People -Force
+
+	# Search icon	
+	New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchboxTaskbarMode -PropertyType DWord -Value 1 -Force
+
+	# show all tray icons
+	New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name EnableAutoTray -PropertyType DWord -Value 0 -Force
+
+	# meet now hidden
+	$Settings = Get-ItemPropertyValue -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3 -Name Settings -ErrorAction Ignore
+	$Settings[9] = 128
+	New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3 -Name Settings -PropertyType Binary -Value $Settings -Force
 
 
 
